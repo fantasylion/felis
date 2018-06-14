@@ -1,0 +1,67 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.serio</groupId>
+  <artifactId>felis</artifactId>
+  <version>1.0.1-SNAPSHOT</version> 
+  <packaging>jar</packaging>
+  <description>data migration</description>
+  <dependencies>
+	<!-- https://mvnrepository.com/artifact/com.ximpleware/vtd-xml -->
+	<dependency>
+	    <groupId>com.ximpleware</groupId>
+	    <artifactId>vtd-xml</artifactId>
+	    <version>2.13.4</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+	<dependency>
+	    <groupId>postgresql</groupId>
+	    <artifactId>postgresql</artifactId>
+	    <version>9.1-901.jdbc3</version>
+	</dependency>
+	<dependency>
+	    <groupId>net.iharder</groupId>
+	    <artifactId>base64</artifactId>
+	    <version>2.3.8</version>
+	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+	<dependency>
+	    <groupId>com.alibaba</groupId>
+	    <artifactId>fastjson</artifactId>
+	    <version>1.2.47</version>
+	</dependency>
+
+  </dependencies>
+  <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <exec.mainClass>com.serio.felis.hamal.Stevedore</exec.mainClass>
+  </properties>
+	<build>  
+	    <plugins>
+	        <plugin>
+	            <groupId>org.apache.maven.plugins</groupId>
+	            <artifactId>maven-assembly-plugin</artifactId>
+	            <version>2.5.5</version>
+	            <configuration>
+	                <archive>
+	                    <manifest>
+	                        <mainClass>com.serio.felis.hamal.Stevedore</mainClass>
+	                    </manifest>
+	                </archive>
+	                <descriptorRefs>
+	                    <descriptorRef>jar-with-dependencies</descriptorRef>
+	                </descriptorRefs>
+	            </configuration>
+	            <executions>
+	                <execution>
+	                    <id>make-assembly</id>
+	                    <phase>package</phase>
+	                    <goals>
+	                        <goal>single</goal>
+	                    </goals>
+	                </execution>
+	            </executions>
+	        </plugin>
+	    </plugins>
+	</build>
+</project>
