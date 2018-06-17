@@ -17,6 +17,7 @@ package com.serio.felis.assembly;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * 用于指定那些字段是属于的那些表的
@@ -26,5 +27,5 @@ import java.util.Map;
 public abstract class ParticipleFactory {
 	
 	public abstract void buildRawmaterial( List<Map<String, String>> rawmaterial );
-
+	
 }

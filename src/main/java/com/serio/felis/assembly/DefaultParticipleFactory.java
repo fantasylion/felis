@@ -14,7 +14,6 @@ import java.util.Set;
  */
 public class DefaultParticipleFactory extends ParticipleFactory {
 
-	protected String[]            baseArray			=	null;
 	protected List<String>        baseList			=	null;
 	protected Map<String, String> baseMap			=	new HashMap<String, String>();
 	
@@ -24,11 +23,9 @@ public class DefaultParticipleFactory extends ParticipleFactory {
 		for ( Map<String, String> map :  rawmaterial ) {
 			
 			for ( Entry<String,String> entry : map.entrySet() ) {
-				if ( baseList.contains(entry.getKey()) ) {
-					baseMap.put(entry.getKey(), entry.getValue());
-				}
-				
+				buildRawmaterials( map, baseMap );
 			}
+			
 		}
 	}
 	
@@ -37,13 +34,20 @@ public class DefaultParticipleFactory extends ParticipleFactory {
 		
 		Map<String, String> result = new HashMap<String, String>();
 		
-		for ( Entry<String,String> entry : map.entrySet() ) {
+		return buildRawmaterials( map, result );
+		
+	}
+	
+	
+	public Map<String, String> buildRawmaterials( Map<String, String> processMap, Map<String, String> destinationMap ) {
+		
+		for ( Entry<String,String> entry : processMap.entrySet() ) {
 			if ( baseList.contains(entry.getKey()) ) {
-				result.put(entry.getKey(), entry.getValue());
+				destinationMap.put(entry.getKey(), entry.getValue());
 			}
 		}
 		
-		return result;
+		return destinationMap;
 	}
 	
 	

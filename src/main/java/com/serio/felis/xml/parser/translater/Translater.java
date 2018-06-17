@@ -15,11 +15,15 @@
  */
 package com.serio.felis.xml.parser.translater;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
 /**
- * @author zl.shi
+ * @author serio.shi
  *
  */
-public class Translater {
+public abstract class Translater {
 	
 	
 	 Dictionary dic;
@@ -31,6 +35,47 @@ public class Translater {
 		this.dic = dic;
 	}
 	
+	
+	abstract Map<String, String> buildBucket();
+	
+	/**
+	 * 
+	 * Translate the key and value with the init dictionary. 
+	 * @param map
+	 * @return
+	 */
+	public Map<String, String> translate( Map<String, String> map ) {
+		return translate( dic, map );
+	}
+	
+	
+	/**
+	 * 
+	 * Translate the key and value with the specified dictionary. 
+	 * @param dic
+	 * @param map
+	 * @return
+	 */
+	public Map<String, String> translate( Dictionary dic,  Map<String, String> map ) {
+		
+		Map<String, String> result = new HashMap<String, String>();
+		
+		Map<String, String> mapTemp;
+		for ( Entry<String, String> entry : map.entrySet() ) {
+			mapTemp = dic.searchKeyValue( entry.getKey(), entry.getValue() );
+			if ( mapTemp != null )
+				result.putAll(mapTemp);
+		}
+		
+		return result;
+	}
+	
+	
+	/**
+	 * Translate the single word 
+	 * @param keyword
+	 * @return
+	 */
 	public String translate( String keyword ) {
 		return this.dic.searchKey(keyword);
 	}

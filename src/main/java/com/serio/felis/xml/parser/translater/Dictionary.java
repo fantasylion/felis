@@ -119,7 +119,6 @@ public abstract class Dictionary {
 
 		Map<String, String> map = new HashMap<String, String>();
 		String valued = searchValue(key, value);
-//		map.put( key, searchValue(keyWord, endecryptFields( key, valued )) );
 		map.put( key, endecryptFields( key, valued ) );
 		
 		return map;
