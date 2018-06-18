@@ -24,8 +24,13 @@ import com.ximpleware.extended.NavExceptionHuge;
 import com.ximpleware.extended.SupperAutoPilotHuge;
 import com.ximpleware.extended.VTDNavHuge;
 
+
+/**
+ * Used to parse to xml files. This class file contain base method. 
+ * @author serio.shi
+ *
+ */
 public abstract class Parser {
-//	private static final Logger		logger					= LoggerFactory.getLogger(Parser.class);
 
 
 	/**
@@ -35,7 +40,7 @@ public abstract class Parser {
 	
 	
 	/**
-	 * 解析子节点的子节点，并将节点数据存储到Map中
+	 * Parse child nodes of child nodes and store node data in Map.
 	 * @param vnh
 	 * @param map
 	 */
@@ -58,7 +63,7 @@ public abstract class Parser {
 	
 	
 	/**
-	 * 解析子节点，并将节点的数据存储到指定Map中，并跳转到下个父节点
+	 * Parse the child node, store the data of the node into the specified Map, and jump to the original parent node.
 	 * @param vnh
 	 * @param map
 	 */
@@ -77,7 +82,7 @@ public abstract class Parser {
 	
 	
 	/**
-	 * 解析子节点，并将节点的数据存储到指定Map中，并跳转到父节点
+	 * Parse the child node, store the data of the node into the specified Map, and jump to the parent node.
 	 * @param vnh
 	 * @param map
 	 */
@@ -105,19 +110,19 @@ public abstract class Parser {
 		try {
 
 			if ( vnh.matchElement("custom-attributes") ) {
-				parseCustomChild( vnh, map );
+				parseCustomChild( vnh, map, "attribute-id" );
 			} else {
 				parseToMap(vnh, map);
 			}
 		} catch (Exception e) {
-//			logger.error("Has exception",e);
+
 		}
 		
 	}
 	
 	
 	/**
-	 * 解析custom结构的元素，并调到下一个父节点<br>
+	 * Resolve the elements of the custom structure and transfer to the next parent<br>
 	 * &lt;custom-attribute attribute-id=&quot;emailValidationExpireTime&quot;&gt;1.513841135705E12&lt;/custom-attribute&gt;<br>
 	 * &lt;custom-attribute attribute-id=&quot;isAgreedPrivacyPolicy&quot;&gt;true&lt;/custom-attribute&gt;<br>
 	 * &lt;custom-attribute attribute-id=&quot;lastAgreedPrivacyPolicy&quot;&gt;2018-03-14T07:26:57.503+0000&lt;/custom-attribute&gt;<br>
@@ -125,9 +130,9 @@ public abstract class Parser {
 	 * @param vnh
 	 * @param map
 	 */
-	public void parseCustomChild( VTDNavHuge vnh, Map<String, String> map ) {
+	public void parseCustomChild( VTDNavHuge vnh, Map<String, String> map, String attrName ) {
 		try {
-			parseCustomChilds(vnh, map);
+			parseCustomChilds(vnh, map, attrName);
 			this.toParentNext(vnh);
 		} catch (Exception e) {
 //			logger.error("Has exception",e);
@@ -136,7 +141,7 @@ public abstract class Parser {
 	
 	
 	/**
-	 * 解析custom结构的元素<br>
+	 * Resolve the elements of the custom structure<br>
 	 * &lt;custom-attribute attribute-id=&quot;emailValidationExpireTime&quot;&gt;1.513841135705E12&lt;/custom-attribute&gt;<br>
 	 * &lt;custom-attribute attribute-id=&quot;isAgreedPrivacyPolicy&quot;&gt;true&lt;/custom-attribute&gt;<br>
 	 * &lt;custom-attribute attribute-id=&quot;lastAgreedPrivacyPolicy&quot;&gt;2018-03-14T07:26:57.503+0000&lt;/custom-attribute&gt;<br>
@@ -144,11 +149,11 @@ public abstract class Parser {
 	 * @param vnh
 	 * @param map
 	 */
-	public void parseCustomChilds( VTDNavHuge vnh, Map<String, String> map ) {
+	public void parseCustomChilds( VTDNavHuge vnh, Map<String, String> map, String attrName ) {
 		try {
 			vnh.toElement(VTDNav.FIRST_CHILD);
 			do{
-				this.customAttributeToMap(vnh, map);
+				this.customAttributeToMap(vnh, map, attrName);
 			} while(vnh.toElement(VTDNav.NEXT_SIBLING));
 			
 		} catch (Exception e) {
@@ -158,7 +163,7 @@ public abstract class Parser {
 	
 	
 	/**
-	 * 解析当前所有的子节点，并将节点数据存储到Map中，指针调回当前节点的父节点
+	 * Parse all current child nodes, store the node data in the Map, and redirect the pointer to the current node's parent node.
 	 * @param vnh
 	 * @param map
 	 */
@@ -175,7 +180,7 @@ public abstract class Parser {
 	
 	
 	/**
-	 * 解析当前节点的兄弟节点和所有的子节点，并将节点数据存储到Map中，指针调回当前节点的节点
+	 * Parse the current node's sibling node and all child nodes, store the node data in the Map, and redirect the pointer to the node of the current node.
 	 * @param vnh
 	 * @param map
 	 */
@@ -196,7 +201,7 @@ public abstract class Parser {
 	
 	
 	/**
-	 * 解析元素对象和元素的属性值，通过key-value的格式存储到Map中
+	 * Parse element object and element attribute values and store them in the format of key-value to the Map.
 	 * @param vnh
 	 * @param map
 	 * @throws NavExceptionHuge
@@ -208,7 +213,7 @@ public abstract class Parser {
 	
 	
 	/**
-	 * 这种结构的取值<br>
+	 * The value of structure like this<br>
 	 * <code>
 	 * &lt;custom-attribute attribute-id=&quot;emailValidationExpireTime&quot;&gt;1.513841135705E12&lt;/custom-attribute&gt;<br>
 	 * &lt;custom-attribute attribute-id=&quot;isAgreedPrivacyPolicy&quot;&gt;true&lt;/custom-attribute&gt;<br>
@@ -219,13 +224,13 @@ public abstract class Parser {
 	 * @param map
 	 * @throws NavExceptionHuge
 	 */
-	public void customAttributeToMap( VTDNavHuge vnh, Map<String, String> map )throws NavExceptionHuge {
-		map.put(vnh.toString(vnh.getAttrVal("attribute-id")), vnh.toString(vnh.getText()));
+	public void customAttributeToMap( VTDNavHuge vnh, Map<String, String> map, String attrName )throws NavExceptionHuge {
+		map.put(vnh.toString(vnh.getAttrVal(attrName)), vnh.toString(vnh.getText()));
 	}
 	
 	
 	/**
-	 * 将元素的Text设置到指定的map对象中
+	 * Set the element's Text to the specified map object
 	 * @param vnh
 	 * @param map
 	 * @throws NavExceptionHuge
@@ -240,7 +245,7 @@ public abstract class Parser {
 	
 	
 	/**
-	 * 将元素的属性值设置到指定的Map对象中
+	 * Set value of the element to the specified Map object.
 	 * @param vnh
 	 * @param map
 	 * @throws NavExceptionHuge
@@ -264,7 +269,8 @@ public abstract class Parser {
 	
 	
 	/**
-	 * 到父节点的下一个节点
+	 * 
+	 * Moves the current pointer to the next node of the parent node.
 	 * @param vnh
 	 * @throws NavExceptionHuge
 	 */
