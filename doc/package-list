@@ -1,0 +1,13 @@
+com.felis.test.parser
+com.serio.felis.assembly
+com.serio.felis.db
+com.serio.felis.hamal
+com.serio.felis.hamal.common
+com.serio.felis.hamal.exception
+com.serio.felis.sql.maker
+com.serio.felis.sql.maker.review
+com.serio.felis.sql.maker.sequence
+com.serio.felis.tools
+com.serio.felis.xml.parser
+com.serio.felis.xml.parser.translater
+com.ximpleware.extended
