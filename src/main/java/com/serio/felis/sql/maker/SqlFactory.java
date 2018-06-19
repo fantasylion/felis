@@ -375,7 +375,7 @@ public abstract class SqlFactory {
 	
 	
 	/**
-	 * 将XML中解析出来的字段，转义成nebula里面的字段
+	 * 将XML中解析出来的字段，转义成需要的字段
 	 * @param dic
 	 * @param map
 	 * @return
