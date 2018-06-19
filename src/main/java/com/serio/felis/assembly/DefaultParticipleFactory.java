@@ -9,7 +9,7 @@ import java.util.Set;
 
 /**
  * 默认简单版挑选器，直接初始化{@link #baseList}即可
- * @author SSH5662
+ * @author serio.shi
  *
  */
 public class DefaultParticipleFactory extends ParticipleFactory {

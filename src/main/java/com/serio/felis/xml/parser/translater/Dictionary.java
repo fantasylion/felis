@@ -24,7 +24,7 @@ import com.serio.felis.tools.SuperAESEncryptor;
 
 
 /**
- * 对字段和字段值转换成Nebula的字段名和值域
+ * 对字段和字段值转换成需要的字段名和值域
  * @author zl.shi
  *
  */
