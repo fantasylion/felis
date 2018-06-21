@@ -64,19 +64,6 @@ public abstract class SqlFactory {
 	
 	public abstract void run( String inputFilePath );
 	
-	/**
-	 * 获取参数inputFilePath
-	 * @param args
-	 * @return
-	 */
-	public static String findInputFilePath( String[] args ) {
-		if ( args.length < 1 ) {
-			throw new RuntimeException("Please set inputFilePath");
-		}
-		
-		return args[0];
-	}
-	
 	
 	/**
 	 * 生成sql 语句并写到文件中
