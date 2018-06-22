@@ -14,7 +14,6 @@ import com.serio.felis.hamal.exception.SqlFactoryException;
  *
  */
 public class FilePool {
-//	private static final Logger		logger					= LoggerFactory.getLogger(FilePool.class);
 
 	public static final long BYTE_1G    = 2147483648L;
 	public static final long BYTE_512MB = 536870912L;

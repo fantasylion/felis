@@ -77,7 +77,7 @@ public abstract class Translater {
 	 * @return
 	 */
 	public String translate( String keyword ) {
-		return this.dic.searchKey(keyword);
+		return this.dic.translateKey(keyword);
 	}
 	
 }

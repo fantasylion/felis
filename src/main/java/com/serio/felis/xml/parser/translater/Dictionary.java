@@ -53,7 +53,7 @@ public abstract class Dictionary {
 	 * @param keyWord
 	 * @return
 	 */
-	public String searchKey(String keyWord) {
+	public String translateKey( String keyWord ) {
 		return this.dictionary.get(keyWord);
 	}
 	
@@ -64,7 +64,7 @@ public abstract class Dictionary {
 	 * @param value
 	 * @return
 	 */
-	public String searchKey( String keyWord, String value ) {
+	public String searchKey( String keyWord ) {
 		
 		String key = dictionary.get(keyWord);
 		
@@ -80,11 +80,6 @@ public abstract class Dictionary {
 	 * @return
 	 */
 	public String searchValue( String keyWord, String value ) {
-		if ( "lifecycle".equalsIgnoreCase(keyWord) ) {
-			if ( "true".equalsIgnoreCase(value) ) {
-				return "0";
-			}
-		}
 		return value;
 		
 	}
@@ -111,14 +106,14 @@ public abstract class Dictionary {
 	 */
 	public Map<String, String> searchKeyValueDefault( String keyWord, String value ) {
 		
-		String key = searchKey( keyWord, value );
+		String key = searchKey( keyWord );
 		
 		if ( key == null ) {
 			return null;
 		}
 
+		String valued = searchValue( keyWord, value );
 		Map<String, String> map = new HashMap<String, String>();
-		String valued = searchValue(key, value);
 		map.put( key, endecryptFields( key, valued ) );
 		
 		return map;
