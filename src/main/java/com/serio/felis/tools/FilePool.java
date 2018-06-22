@@ -9,7 +9,7 @@ import com.serio.felis.hamal.exception.SqlFactoryException;
 
 
 /**
- * 文件池，当一个文件过大时需要将一个文件拆成多个文件，需要通过虚拟机变量：fileOutputDir 配置输出目录
+ * 文件池，当一个文件过大时需要将一个文件拆成多个文件，需要通过虚拟机变量：file.output 配置输出目录
  * @author zl.shi
  *
  */
@@ -38,7 +38,7 @@ public class FilePool {
 	
 	public FilePool( String fileName ) {
 
-		filePath = System.getProperty("fileOutputDir");
+		filePath = System.getProperty("file.output");
 		if ( filePath == null || filePath.isEmpty() ) {
 			throw new SqlFactoryException("Please set fileOutputDir by vm argument");
 		}

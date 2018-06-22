@@ -18,7 +18,6 @@ package com.serio.felis.sql.maker;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -28,7 +27,6 @@ import com.serio.felis.hamal.exception.IndexException;
 import com.serio.felis.tools.SqlScriptFileMaker;
 import com.serio.felis.tools.SqlScriptFileSuperMaker;
 import com.serio.felis.tools.TimeTool;
-import com.serio.felis.xml.parser.translater.Dictionary;
 
 
 /**
@@ -37,7 +35,6 @@ import com.serio.felis.xml.parser.translater.Dictionary;
  */
 public abstract class SqlFactory {
 	
-//	private static final Logger		logger					=	LoggerFactory.getLogger(SqlFactory.class);
 
 	public static String INSERT_PREFIX		= "INSERT INTO";
 	
@@ -360,26 +357,6 @@ public abstract class SqlFactory {
 		return map;
 	}
 	
-	
-	/**
-	 * 将XML中解析出来的字段，转义成需要的字段
-	 * @param dic
-	 * @param map
-	 * @return
-	 */
-	public Map<String, String> translaterMap(Dictionary dic,  Map<String, String> map ) {
-		
-		Map<String, String> result = new HashMap<String, String>();
-		
-		Map<String, String> mapTemp;
-		for ( Entry<String, String> entry : map.entrySet() ) {
-			mapTemp = dic.searchKeyValue( entry.getKey(), entry.getValue() );
-			if ( mapTemp != null )
-				result.putAll(mapTemp);
-		}
-		
-		return result;
-	}
 	
 	
 	/**
